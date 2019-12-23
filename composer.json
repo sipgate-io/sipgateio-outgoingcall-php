@@ -1,12 +1,12 @@
 {
   "name": "sipgate/sipgateio-outgoingcall-php",
-  "description": "Code example to demonstrate how to authenticate against the sipgate REST API using basic auth.",
+  "description": "A demonstration of how to initiate a call using sipgate.io",
   "minimum-stability": "stable",
   "license": "unlicense",
   "authors": [
     {
-      "name": "Hacking Talents",
-      "email": "sipgateio-team@sipgate.de"
+      "name": "sipgate.io Team",
+      "email": "io-team@sipgate.de"
     }
   ],
   "autoload": {
