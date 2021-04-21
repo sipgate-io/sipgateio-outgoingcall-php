@@ -8,9 +8,9 @@ For further information regarding sipgate REST API please visit https://api.sipg
 
 ### Prerequisites
 
--   [composer](https://getcomposer.org)
--   php >= 7.0
--   VoIP client
+- [composer](https://getcomposer.org)
+- php >= 7.0
+- VoIP client
 
 ### How to use
 
@@ -25,8 +25,8 @@ $ composer install
 In order to run the code you have to set the following variables in [OutgoingCall.php](src/OutgoingCall.php):
 
 ```php
-$username = "YOUR_SIPGATE_EMAIL";
-$password = "YOUR_SIPGATE_PASSWORD";
+$tokenId = "YOUR_SIPGATE_TOKEN_ID";
+$token = "YOUR_SIPGATE_TOKEN";
 
 $deviceId = "YOUR_SIPGATE_DEVICE_EXTENSION";
 $caller = "DIALING_DEVICE";
@@ -63,14 +63,14 @@ protected function send(Call $call): ZttpResponse
             "Accept" => "application/json",
             "Content-Type" => "application/json"
         ])
-        ->withBasicAuth($this->username, $this->password)
+        ->withBasicAuth($this->tokenId, $this->token)
         ->post(self::$BASE_URL."/sessions/calls", $call->toArray());
 }
 ```
 
-We use the package `Zttp` for request generation and execution. Headers and authorization header  are generated from `withHeaders` and `withBasicAuth` methods respectively. The request URL consists of the base URL defined above and the endpoint `/sessions/calls`. The method `withBasicAuth` from the `Zttp` package takes credentials and generates the required Basic Auth header (for more information on Basic Auth see our [code example](https://github.com/sipgate-io/sipgateio-basicauth-java)).
+We use the package `Zttp` for request generation and execution. Headers and authorization header are generated from `withHeaders` and `withBasicAuth` methods respectively. The request URL consists of the base URL defined above and the endpoint `/sessions/calls`. The method `withBasicAuth` from the `Zttp` package takes credentials and generates the required Basic Auth header (for more information on Basic Auth see our [code example](https://github.com/sipgate-io/sipgateio-basicauth-java)).
 
-> If OAuth should be used for `Authorization` instead of Basic Auth we do not use the `withBasicAuth(username, password)` method. Instead we set the authorization header to `Bearer` followed by a space and the access token: `Zttp::withHeaders(["Authorization" => "Bearer " . accessToken])`. For an example application interacting with the sipgate API using OAuth see our [sipgate.io Java Oauth example](https://github.com/sipgate-io/sipgateio-oauth-java).
+> If OAuth should be used for `Authorization` instead of Basic Auth we do not use the `withBasicAuth(tokenId, token)` method. Instead we set the authorization header to `Bearer` followed by a space and the access token: `Zttp::withHeaders(["Authorization" => "Bearer " . accessToken])`. For an example application interacting with the sipgate API using OAuth see our [sipgate.io Java Oauth example](https://github.com/sipgate-io/sipgateio-oauth-java).
 
 ### Web Phone Extensions
 
@@ -105,14 +105,12 @@ Possible reasons are:
 | reason                                                                                                                            | errorcode |
 | --------------------------------------------------------------------------------------------------------------------------------- | :-------: |
 | bad request (e.g. request body fields are empty or only contain spaces, timestamp is invalid etc.)                                |    400    |
-| username and/or password are wrong                                                                                                |    401    |
-| insufficient account balance                                                                                                                        |    402    |
+| tokenId and/or token are wrong                                                                                                    |    401    |
+| insufficient account balance                                                                                                      |    402    |
 | no permission to use specified Web Phone extension (e.g. user password must be reset in [web app](https://app.sipgate.com/login)) |    403    |
 | wrong REST API endpoint                                                                                                           |    404    |
 | wrong request method                                                                                                              |    405    |
 | wrong or missing `Content-Type` header with `application/json`                                                                    |    415    |
-
-
 
 ### Related
 
