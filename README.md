@@ -35,6 +35,12 @@ $callerId = "DISPLAYED_CALLER_NUMBER";
 $callee = "YOUR_RECIPIENT_PHONE_NUMBER";
 ```
 
+The token should have the following scopes:
+
+- `sessions:calls:write`
+
+For more information about personal access token, visit https://www.sipgate.io/rest-api/authentication#personalAccessToken.
+
 The `deviceId` uniquely identifies the phone extension which establishes the phone connection,
 this variable is needed only when the `caller` is a phone number and not a device extension. Further explanation is given in the section [Web Phone Extensions](#web-phone-extensions). Nevertheless you can still use both as device extension, but in this case the `deviceId` will be ignored.
 
