@@ -4,15 +4,20 @@ use Sipgate\Io\Example\OutgoingCall\SipgateClient;
 
 require_once __DIR__."/../vendor/autoload.php";
 
-$tokenId = "YOUR_SIPGATE_TOKEN_ID";
-$token = "YOUR_SIPGATE_TOKEN";
 
-$deviceId = "YOUR_SIPGATE_DEVICE_EXTENSION";
-$caller = "DIALING_DEVICE";
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/..");
+$dotenv->load();
 
-$callerId = "DISPLAYED_CALLER_NUMBER";
-$callee = "YOUR_RECIPIENT_PHONE_NUMBER";
 
+
+$tokenId = $_ENV['TOKEN_ID'];
+$token = $_ENV['TOKEN'];
+
+$deviceId = $_ENV['DEVICE_ID'];
+$caller = $_ENV['CALLER'];
+
+$callerId = $_ENV['CALLER_ID'];
+$callee = $_ENV['CALLEE'];
 
 $client = new SipgateClient($tokenId, $token);
 

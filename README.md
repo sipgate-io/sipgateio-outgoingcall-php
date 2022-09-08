@@ -22,18 +22,8 @@ Install dependencies manually or use your IDE's import functionality:
 $ composer install
 ```
 
-In order to run the code you have to set the following variables in [OutgoingCall.php](src/OutgoingCall.php):
+Create the `.env` by copying the [`.env.example`](.env.example) and set the values according to the comment above each variable.
 
-```php
-$tokenId = "YOUR_SIPGATE_TOKEN_ID";
-$token = "YOUR_SIPGATE_TOKEN";
-
-$deviceId = "YOUR_SIPGATE_DEVICE_EXTENSION";
-$caller = "DIALING_DEVICE";
-
-$callerId = "DISPLAYED_CALLER_NUMBER";
-$callee = "YOUR_RECIPIENT_PHONE_NUMBER";
-```
 
 The token should have the following scopes:
 
@@ -41,10 +31,10 @@ The token should have the following scopes:
 
 For more information about personal access token, visit https://www.sipgate.io/rest-api/authentication#personalAccessToken.
 
-The `deviceId` uniquely identifies the phone extension which establishes the phone connection,
-this variable is needed only when the `caller` is a phone number and not a device extension. Further explanation is given in the section [Web Phone Extensions](#web-phone-extensions). Nevertheless you can still use both as device extension, but in this case the `deviceId` will be ignored.
+The `DEVICE_ID` uniquely identifies the phone extension which establishes the phone connection,
+this variable is needed only when the `CALLER` is a phone number and not a device extension. Further explanation is given in the section [Web Phone Extensions](#web-phone-extensions). Nevertheless you can still use both as device extension, but in this case the `DEVICE_ID` will be ignored.
 
-Use `callee` and `callerId` to set the recipient phone number and the displayed caller number respectively.
+Use `CALLEE` and `CALLER_ID` to set the recipient phone number and the displayed caller number respectively.
 
 Run the application:
 
